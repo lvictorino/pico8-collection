@@ -48,6 +48,9 @@ function _draw()
 	end
 	-- draw the cursor
 	rect(pos.x-1,pos.y-1,pos.x+1,pos.y+1,5)
+	-- help text
+	print("arrows:move",1,1,0)
+	print("x:add a line",1,7,0)
 end
 
 -- basic brenseham algorithm
