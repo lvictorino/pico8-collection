@@ -19,8 +19,8 @@ function _init()
 	pos.x=64
 	pos.y=64
 	
--- create 35 boids
-	for i=0,35 do
+-- create 25 boids
+	for i=0,25 do
 		b={}
 		b.velocity={}
 		b.velocity.x=0
@@ -65,8 +65,8 @@ function _init()
 			v.x=v.x/#boids
 			v.y=v.y/#boids
 			vr={}
-			vr.x=(v.x-boid.pos.x)/100-- move only toward 1%
-			vr.y=(v.y-boid.pos.y)/100-- move only toward 1%
+			vr.x=(v.x-boid.pos.x)/100 -- move only toward 1%
+			vr.y=(v.y-boid.pos.y)/100 -- move only toward 1%
 			return vr
 		end
 		b.keepdistance=function(boid)
