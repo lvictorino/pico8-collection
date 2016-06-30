@@ -18,7 +18,44 @@ function _init()
 -- init cursor position
 	pos.x=64
 	pos.y=64
+
+	createboids()	
+end
+
+function _update()
+	-- move cursor position
+	if btn(0) then pos.x-=1 end
+	if btn(1) then pos.x+=1 end
+	if btn(2) then pos.y-=1 end
+	if btn(3) then pos.y+=1 end
+
+	-- on x press, update the min distance	
+	if btn(5) and btnp(5)==true then
+		mindistance+=1
+		if mindistance>10 then
+			mindistance=1
+		end
+	end
 	
+	for boid in all(boids) do
+		boid.update(boid)
+	end
+end
+
+function _draw()
+	cls()
+	-- draw all boids
+	for b in all(boids) do
+		b.draw(b)
+	end
+	-- draw cursor
+	rect(pos.x-1,pos.y-1,pos.x+1,pos.y+1,8);
+	-- draw helpers
+	print("arrows:move",1,1,7)
+	print("x: change min distance("..mindistance..")",1,7,7)
+end
+
+function createboids()
 -- create 25 boids
 	for i=0,25 do
 		b={}
@@ -29,7 +66,7 @@ function _init()
 		-- set a random initial position
 		b.pos.x=flr(rnd(127))
 		b.pos.y=flr(rnd(127))
-		b.draw=function(boid)
+		b.update=function(boid)
 			-- rule1: try to fly toward the flock mass
 			v1=boid.flytowardcentralmass(boid)
 			-- rule2: try to keep your distance with 
@@ -47,6 +84,8 @@ function _init()
 			-- update position according to velocity
 			boid.pos.x+=boid.velocity.x
 			boid.pos.y+=boid.velocity.y
+		end
+		b.draw=function(boid)
 			-- draw the boid (simple cross)
 			line(boid.pos.x,boid.pos.y-1,boid.pos.x,boid.pos.y+1,6)
 			line(boid.pos.x-1,boid.pos.y,boid.pos.x+1,boid.pos.y,6)
@@ -119,35 +158,6 @@ function _init()
 		end
 		add(boids,b)
 	end
-end
-
-function _update()
-	-- move cursor position
-	if btn(0) then pos.x-=1 end
-	if btn(1) then pos.x+=1 end
-	if btn(2) then pos.y-=1 end
-	if btn(3) then pos.y+=1 end
-
-	-- on x press, update the min distance	
-	if btn(5) and btnp(5)==true then
-		mindistance+=1
-		if mindistance>10 then
-			mindistance=1
-		end
-	end
-end
-
-function _draw()
-	cls()
-	-- draw all boids
-	for b in all(boids) do
-		b.draw(b)
-	end
-	-- draw cursor
-	rect(pos.x-1,pos.y-1,pos.x+1,pos.y+1,8);
-	-- draw helpers
-	print("arrows:move",1,1,7)
-	print("x: change min distance("..mindistance..")",1,7,7)
 end
 
 -- return the distance between 
