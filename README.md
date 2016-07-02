@@ -8,5 +8,8 @@ Repository containing some of my Pico-8 experiments.
 ##[Flocking system](flock.p8)
 ![Flock](imgs/flock.gif)
 
+##[Maze generator](mazegen.p8)
+![MazeGen](imgs/mazegen.gif)
+
 ##[Mid point circle algorithm](midpointcircle.p8)
 ![Mid point](imgs/midpointcircle.gif)
