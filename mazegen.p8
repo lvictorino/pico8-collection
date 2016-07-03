@@ -106,28 +106,41 @@ function hasunvisited()
 end
 
 -- update the current maze generation state
+-- one update per frame update
 function updatemazegen()
+	-- add the cell we're on to the generation queue if needed
 	if addn == true then
 		add(genqueue,n)
 	end
+	-- mark current cell as visited
 	n.visited=true
 
+	-- > if the current cell has unvisited neighbors:
+	--   - pick a random unvisited neighbor
+	--   - break the wall between current cell and chosen neighbor
+	--   - set chosen neighbor as current cell
+	-- > else
+	--   > if generation queue contains items
+	--     - pop generation queue
+	--     - set popped cell as n
+	--   > else
+	--     - quit updating the generation
+	-- (note: pop generation queue until you find a cell with unvisited neighbor, 
+	--        instead of one time popping. I made it for the sake of the animation)
 	if n.hasunvisitedneighb(n) == true then
 		a=n.rndunvisitedneighb(n)
-		 n.breakwalls(n,a.id)
-		 a.breakwalls(a,n.id)
-		 n=a
-		 addn=true
+		n.breakwalls(n,a.id)
+		a.breakwalls(a,n.id)
+		n=a
+		addn=true -- add current cell to the generation queue next update
 	else
-		while n.hasunvisitedneighb(n) == false do
-			if #genqueue != 0 then
-				n=genqueue[#genqueue]
-				del(genqueue,n)
-				addn=false
-				return
-			else
-				return
-			end
+		if #genqueue != 0 then
+			n=genqueue[#genqueue]
+			del(genqueue,n)
+			addn=false
+			return
+		else
+			return
 		end
 	end
 end
