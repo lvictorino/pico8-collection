@@ -31,7 +31,8 @@ function initmaze()
 	for i=1,cellcount*cellcount do
 		c={}
 		c.id=i
-		c.visited=false--set as unvisited
+		c.visited=false
+		--set as unvisited
 		c.walls={false,false,false,false}	--false if a wall is present	-- left,up,right,down
 		-- returns true if there is an unvisited neighbor
 		c.hasunvisitedneighb=function(cell)
@@ -71,10 +72,10 @@ function initmaze()
 				end
 			end
 		end
-		add(cells,c)--add current cell to the list
+		add(cells,c) --add current cell to the list
 	end	
 	n=cells[1]
-	addn=true
+	addn=true --mark n to be added to genqueue
 end
 
 function _update()
@@ -106,29 +107,29 @@ end
 
 -- update the current maze generation state
 function updatemazegen()
-			if addn == true then
-				add(genqueue,n)
-			end
-			n.visited=true
+	if addn == true then
+		add(genqueue,n)
+	end
+	n.visited=true
 
-			if n.hasunvisitedneighb(n) == true then
-			 a=n.rndunvisitedneighb(n)
-			 n.breakwalls(n,a.id)
-			 a.breakwalls(a,n.id)
-			 n=a
-			 addn=true
+	if n.hasunvisitedneighb(n) == true then
+		a=n.rndunvisitedneighb(n)
+		 n.breakwalls(n,a.id)
+		 a.breakwalls(a,n.id)
+		 n=a
+		 addn=true
+	else
+		while n.hasunvisitedneighb(n) == false do
+			if #genqueue != 0 then
+				n=genqueue[#genqueue]
+				del(genqueue,n)
+				addn=false
+				return
 			else
-				while n.hasunvisitedneighb(n) == false do
-					if #genqueue != 0 then
-						n=genqueue[#genqueue]
-						del(genqueue,n)
-						addn=false
-						return
-					else
-						return
-					end
-				end
+				return
 			end
+		end
+	end
 end
 
 function _draw()
