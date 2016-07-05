@@ -14,5 +14,8 @@ Repository containing some of my Pico-8 experiments.
 ##[Mid point circle algorithm](midpointcircle.p8)
 ![Mid point](imgs/midpointcircle.gif)
 
+##[PicoTrix (tweet code)](picotrix.p8)
+![PicoTrix](imgs/picotrix.gif)
+
 ##[Space colonization algorithm](treegen.p8)
 ![Tree gen](imgs/treegen.gif)
