@@ -1,6 +1,9 @@
 pico-8 cartridge // http://www.pico-8.com
 version 7
 __lua__
+-- one liner matrix effect
+-- made to fit a tweet size (132 characters)
+-- by laurent victorino
 f={}function _draw() b={rnd(127),rnd(127)-127}add(f,b) for d in all(f) do c={0,3,11}pset(d[1],d[2],c[flr(rnd(3)+1)])d[2]+=1 end end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
