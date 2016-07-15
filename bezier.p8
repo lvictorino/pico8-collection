@@ -55,10 +55,13 @@ function _draw()
 	line(p1.x,p1.y,c1.x,c1.y,c1color)
 	line(p2.x,p2.y,c2.x,c2.y,c2color)
 
-	-- draw the curve (1000points)
-	for i=0,1000 do
-		p=beziercurve(i/1000)
-		pset(p.x,p.y,8)
+	-- draw the curve using a set of lines (20)
+	pp=beziercurve(0)
+	segments=20
+	for i=1,segments-1 do
+	   p=beziercurve(i/(segments-1))
+	   line(pp.x,pp.y,p.x,p.y,8)
+	   pp=p
 	end
 
 	-- draw start and end points
