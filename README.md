@@ -2,6 +2,9 @@
 # Pico-8 experiments
 Repository containing some of my Pico-8 experiments.
 
+##[Bezier curves](bezier.p8)
+![Bezier curves](imgs/bezier.gif)
+
 ##[Bresenham's line algorithm](bresenham.p8)
 ![Bresenham](imgs/bresenham.gif)
 
