@@ -17,5 +17,8 @@ Repository containing some of my Pico-8 experiments.
 ##[PicoTrix (tweet code)](picotrix.p8)
 ![PicoTrix](imgs/picotrix.gif)
 
+##[Scrolling clouds](scrollingclouds.p8)
+![Scrolling clouds](imgs/scrollingclouds.gif)
+
 ##[Space colonization algorithm](treegen.p8)
 ![Tree gen](imgs/treegen.gif)
